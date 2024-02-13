@@ -1,6 +1,6 @@
 joblib
 numpy
-sklearn
+scikit-learn
 requests
 streamlit
 tensorflow
