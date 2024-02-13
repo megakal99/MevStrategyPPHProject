@@ -1,5 +1,6 @@
 joblib
 numpy
+sklearn
 requests
 streamlit
 tensorflow
