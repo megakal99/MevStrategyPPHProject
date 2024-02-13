@@ -1,6 +1,6 @@
-joblib==1.2.0
-numpy==1.23.5
-requests==2.31.0
-streamlit==1.31.0
-tensorflow==2.15.0.post1
-tensorflow_intel==2.15.0
+joblib
+numpy
+requests
+streamlit
+tensorflow
+tensorflow_intel
