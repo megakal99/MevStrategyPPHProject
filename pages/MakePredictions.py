@@ -202,7 +202,7 @@ with st.form("estimate_BaseGasFee_form"):
             st.session_state.ClickedBaseGasButton=True
           elif st.session_state.TargetedBlock-int(BlockNumberInput)<=0:
             st.error("we cannot predict gaseBaseFee for targeted block by same data or predict gaseBaseFee for targeted block based on data of next block!!!")
-            st.session_state.Remaining=None
+            st.session_state.Remaining=0
           elif st.session_state.TargetedBlock-int(BlockNumberInput)==2:
             BlockTimestampInput,GasUsedInput,BlockSizeInput,NbrTxInput,BaseGasFeeInput=callGetBlockByNumberEndpoint(BlockNumberInput)
             Inputs=np.array([BlockTimestampInput,BlockNumberInput,GasUsedInput,BlockSizeInput,NbrTxInput,BaseGasFeeInput]).reshape(-1,6)
