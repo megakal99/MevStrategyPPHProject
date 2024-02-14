@@ -202,6 +202,7 @@ with st.form("estimate_BaseGasFee_form"):
             st.session_state.ClickedBaseGasButton=True
           elif st.session_state.TargetedBlock-int(BlockNumberInput)<=0:
             st.error("we cannot predict gaseBaseFee for targeted block by same data or predict gaseBaseFee for targeted block based on data of next block!!!")
+            st.session_state.Remaining=None
           elif st.session_state.TargetedBlock-int(BlockNumberInput)==2:
             BlockTimestampInput,GasUsedInput,BlockSizeInput,NbrTxInput,BaseGasFeeInput=callGetBlockByNumberEndpoint(BlockNumberInput)
             Inputs=np.array([BlockTimestampInput,BlockNumberInput,GasUsedInput,BlockSizeInput,NbrTxInput,BaseGasFeeInput]).reshape(-1,6)
@@ -284,10 +285,11 @@ if st.session_state.ClickedBaseGasButton: # check is button related to predictBa
   elif st.session_state.Remaining==5:
       st.success('The predicted BaseGasFee in Gwei for next block {} is {}'.format(st.session_state.BlockNumberInput+1,st.session_state.PredictedBaseGasFee))
       st.warning('Remaining Blocks is 5. You have a good estimation with confidence of 95%, the error will be less than 2.42 Gwei. You have mostly less than 60s to execute front runing and back runing transaction, Hurry up !!!!')
-  else:
+  elif st.session_state.Remaining==6:
       st.success('The predicted BaseGasFee in Gwei for next block {} is {}'.format(st.session_state.BlockNumberInput+1,st.session_state.PredictedBaseGasFee))
       st.warning("At least Remaining Blocks is 6. The Estimation can be misleading, with a minimum maximum error of 18 Gwei. You have at least 72 seconds to execute front-running and back-running transactions, but we strongly advise against executing such transactions to avoid potential losses, Please wait at least 12s and click again on button to predict gasBaseFee with accurate result !!!")
-
+  else:
+      st.error("We cannot predict the gasBaseFee for the targeted block because the actual block in Ethereum may be the same or newer than the targeted block for which you are trying to predict its gasBaseFee.")
 st.markdown(""" 
             ### Prediction of MaxPriority or Priority fee of Front-runing and Back-runing Tx: 
             """)
