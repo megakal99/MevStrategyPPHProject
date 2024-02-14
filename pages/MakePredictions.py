@@ -112,7 +112,7 @@ def callBlockTimeCountApiEndpoint(BlockNbr):
       return None  
 ######### Validate BackRuning and Front runing Tx function
 def CheckingFront(txdiff,LimitGaz): 
-         i = 0.225280*LimitGaz ## mean of mean (Difference MaxPriority TargetedTX FrontTx)  front runing Priority distribution of front runing tx in Gwei
+         i = 0.65*LimitGaz ## 75% of mean (Difference MaxPriority TargetedTX FrontTx)  front runing Priority distribution of front runing tx in Gwei
          cou=0
          while txdiff >= 0:
             txdiff -= i 
