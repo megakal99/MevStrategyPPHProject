@@ -120,7 +120,7 @@ def CheckingFront(txdiff,LimitGaz):
          return cou*i
 
 def CheckingBack(txdiff,LimitGaz): 
-         i = 0.065*LimitGaz # 95% of percentile 75% (Difference MaxPriority TargetedTX BackRuningTx)
+         i = 0.075*LimitGaz # 95% of percentile 75% (Difference MaxPriority TargetedTX BackRuningTx)
          cou=0
          while txdiff >= 0:
             txdiff -= i 
@@ -328,8 +328,8 @@ with st.form("estimate_MaxPriorityFBRtx_form"):
     else:
       st.success(f'The transaction is most likely to be included in the same block of targeted Tx with 99% and before TargetedTx directly, with probability more than 85%: {st.session_state.TargetedBlock} before Targeted Transaction ✔️👌 / FrontRuningTx: LimitGaz: {limit_gas} ; GasPrice in Gwei: {PredictedFront.reshape(-1)[0]+base_gas_fee} ; max Total Fee in Gwei (BaseGasFee+MaxPriority)*LimitGaz: {FrontRuningTxMaxFee}')
     if (difBack/int(limit_gas))<-1: # check if diff in GasPrice of Back Runing Tx and TargetedTx is less than -1 Gwei, to handle a huge gap between Tx
-         BackRuningTxMaxFee=BackRuningTxMaxFee-difBack-0.065*int(limit_gas)
-         BackPriorityFeeperUnitGaz=PredictedBack.reshape(-1)[0]-difBack/int(limit_gas)-0.065
+         BackRuningTxMaxFee=BackRuningTxMaxFee-difBack-0.075*int(limit_gas)
+         BackPriorityFeeperUnitGaz=PredictedBack.reshape(-1)[0]-difBack/int(limit_gas)-0.075
          st.success(f'The transaction is most likely to be included in the same block of targeted Tx with 99% and after TargetedTx directly, with probability more than 85%: {st.session_state.TargetedBlock} after Targeted Transaction ✔️👌 / BackRuningTx: LimitGaz: {limit_gas} ; GasPrice in Gwei: {BackPriorityFeeperUnitGaz+base_gas_fee} ; max Total Fee in Gwei (BaseGasFee+MaxPriority)*LimitGaz: {BackRuningTxMaxFee}')
     elif difBack>=0: # check if back running tx max fee more than targeted tx max fee
       DeletedGasFee=CheckingBack(difBack,int(limit_gas))
